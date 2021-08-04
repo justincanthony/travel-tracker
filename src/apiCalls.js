@@ -5,44 +5,38 @@ const getData = (suffix) => {
 
 const getAllData = () => {
   return Promise.all([
-    getData('travelers'),
+    // getData('travelers'),
     getData('travelers/1'),
     getData('trips'),
     getData('destinations'),
   ]);
 };
 
-// ****************************************Get User & Trip
-// Input for UsernameID
-// Input For password
-// if password === travel, then fire Get User and Trip Data
-
 export default getAllData;
 
-// Error Handling
+// ****************************************Get User
+// Input for UsernameID
+// Input For password
+// if password === travel, then fire Get User Data
 
-// export const displayError = (response) => {
-//   if (!response.ok) {
-//     console.log('Something went wrong, try again!')
-//   } else {
-//     console.log(response.json())
-//     return response.json()
-//   }
-// }
+// ****************************************Error Handling
+//
 
 // export const getTraveler = (path) => {
 //   return fetch(`${endPoint}${path}`)
-//     .then(response => displayError(response))
-//     .then(data => data)
-//     .catch(error => console.error(error))
-// }
+//     .then((response) => displayError(response))
+//     .then((data) => data)
+//     .catch((error) => console.error(error));
+// };
 
-// /////////// eror handling /////////
-
-// export const displayError = (response) => {
+// displayError(response)
+// const displayError = (response) => {
 //   if (!response.ok) {
-//     console.log('Something went wrong, try again!')
+//     console.log('Something went wrong, try again!');
 //   } else {
-//     console.log(response.json())
+//     console.log(response.json());
+//     return response.json();
 //   }
-// }
+// };
+
+// .catch((error) => console.error(error));
