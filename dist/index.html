@@ -4,13 +4,251 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.scss">
+  <title>Static Comp Challenge</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-  
-  <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+  <header>
+    <div class="menu-bar">
+      <nav>
+        <ul>
+          <li id="shares"><img class="icon" src="./assets/noun_Share_4087971.svg">CUSTODIANS
+          </li>
+          <li><img class="icon" src="./assets/noun_List_4087656.svg">PROJECTS
+          </li>
+          <li><img class="user-icon" src="./assets/noun_User_3521174.svg">TEAMS
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="admin-menu">
+      <div class="admin-menu-text">
+        <img class="user-icon" src="./assets/noun_User_3521174.svg" alt="user vector">
+        <p class="user-login-menu" type="drop-menu">Username</p>
+        <img class="drop-icon" src="./assets/noun_Arrow_2333182.svg">
+      </div>
+      <p class="logo">Hot Mop</p>
+    </div>
+  </header>
+  <main>
+    <h1>Custodians</h1>
+    <section class="card-container">
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-header">
+          <img class="arrow-icon" src="./assets/noun_forward_3625356.svg" alt="img">
+          <div class="card-header-text">
+            <h5 id="card">VIEWS</h5>
+            <h2>34</h2>
+          </div>
+        </div>
+        <div class="card-main">
+          <div class="card-div">
+            <h3>Custodial Commander</h3>
+            <h5>Date 02/23/16 10:22am</h5>
+          </div>
+          <div class="card-div-grey">
+            <h5>http://custodial.command/zone/team/membernamegoeshere</h5>
+          </div>
+          <div class="card-div">
+            <h5>Title</h5>
+            <h3>Leader of the Cleaners</h3>
+          </div>
+          <div class="card-div">
+            <h5>Hot Messes Cleaned</h5>
+            <h3 id="blue">04</h3>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
   <script src="bundle.js"></script>
-
 </body>
 </html>
