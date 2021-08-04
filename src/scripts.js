@@ -9,10 +9,10 @@ import './images/turing-logo.png';
 
 // ****************************************************importing classes here
 
-// import Traveler from './Traveler';
-// import Agent from './Agent';
-// import Trip from './Trip';
-// import Destination from './Destination';
+import Traveler from './Traveler';
+import Agent from './Agent';
+import Trip from './Trip';
+import Destination from './Destination';
 
 // *******************************************************importing functions
 
@@ -27,17 +27,28 @@ export { traveler, agent, trip, destination };
 
 let traveler, agent, trip, destination;
 
+// ******************************************************event listeners here
+
+// document.getElementById().addEventListener(
+//   'click',
+//   getTravelerData.then((data) => {
+//     traveler = new Traveler(data);
+//   })
+// );
+
 // *******************************************resolving promise from api call
 // All data will be returned to this function in an array
 // will need to access with bracket notation
 // possible to use iterator here to get the user form login maybe the
 // agency holds all data and new classes are instantiated from that as needed
 
+// getTravelerData().then;
+
 getAllData()
   .then((data) => {
-    traveler = new Traveler();
-    destination = new Destination();
-    trip = new Trip();
-    agent = new Agent();
+    traveler = new Traveler(data[0]);
+    trip = new Trip(data[1].trips);
+    destination = new Destination(data[2].destinations);
+    // agent = new Agent();
   })
   .then(displayAllData);
