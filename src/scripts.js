@@ -1,37 +1,40 @@
-// ******************************************************import styling pages here
+// *************************************************import styling pages here
+
 import './css/base.scss';
 import './css/styles.scss';
 
-// **********************************************************importing images here
+// *****************************************************importing images here
+
 import './images/turing-logo.png'
 
+// ****************************************************importing classes here
 
-// *********************************************************importing classes here
-import Class from './file';
-import Class from './file';
-import Class from './file';
-import Class from './file';
-import Class from './file';
+import Traveler from './Traveler';
+import Agency from './Agency';
+import Agent from './Agent';
+import Trip from './Trip';
+import Destination from './Destination';
 
-// ************************************************************importing funcitons
+// *******************************************************importing funcitons
+
 import displayAllData from './updateDOM';
 import getAllData from './apiCalls';
 
-// *****************************************************exporting global variables
+// ************************************************exporting global variables
 
-// export { [global variables declared below] };
-
-
-// ************************************************declaration of global variables
-
-// let global [variable declared above];
+export { traveler, agency, agent, trip, destination };
 
 
-// *************************************************resolving promise from api call
+// *******************************************declaration of global variables
+
+let traveler, agency, agent, trip, destination;
+
+
+// *******************************************resolving promise from api call
 // All data will be returned to this function in an array
 // will need to access with bracket notation
-// possible to use iterator here to get the user foirm login
-// maybe the agency holds all data and things are instantiated from that as needed
+// possible to use iterator here to get the user form login maybe the 
+// agency holds all data and new classes are instantiated from that as needed
 
 getAllData()
   .then((data) => {
@@ -40,6 +43,5 @@ getAllData()
     destination = new Destination();
     trip = new Trip();
     agent = new Agent();
-    );
   })
   .then(displayAllData);
