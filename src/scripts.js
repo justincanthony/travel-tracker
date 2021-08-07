@@ -29,13 +29,16 @@ let traveler, agent, trip, destination;
 
 // ******************************************************event listeners here
 
-// document.getElementById().addEventListener(
-//   'click',
-//   getTravelerData.then((data) => {
-//     traveler = new Traveler(data);
-//   })
-// );
-
+document.querySelector('.menu-bar').addEventListener('click', () => {
+  getAllData()
+    .then((data) => {
+      traveler = new Traveler(data[0]);
+      trip = new Trip(data[1].trips);
+      destination = new Destination(data[2].destinations);
+      // agent = new Agent();
+    })
+    .then(displayAllData);
+});
 // *******************************************resolving promise from api call
 // All data will be returned to this function in an array
 // will need to access with bracket notation
@@ -43,12 +46,3 @@ let traveler, agent, trip, destination;
 // agency holds all data and new classes are instantiated from that as needed
 
 // getTravelerData().then;
-
-getAllData()
-  .then((data) => {
-    traveler = new Traveler(data[0]);
-    trip = new Trip(data[1].trips);
-    destination = new Destination(data[2].destinations);
-    // agent = new Agent();
-  })
-  .then(displayAllData);
