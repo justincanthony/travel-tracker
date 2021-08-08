@@ -1,4 +1,4 @@
-tripTestData = [
+const tripTestData = [
   {
     id: 1,
     userID: 44,
@@ -840,3 +840,4 @@ tripTestData = [
     suggestedActivities: [],
   },
 ];
+export default tripTestData;
