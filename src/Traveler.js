@@ -27,7 +27,7 @@ class Traveler {
   }
 
   getDestinationIDs(data) {
-    return this[data].map((trip) => trip.destinationID);
+    return this.trips.map((trip) => trip.destinationID);
   }
 
   getPastTrips(date) {
