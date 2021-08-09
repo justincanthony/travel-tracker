@@ -26,8 +26,8 @@ class Traveler {
     });
   }
 
-  getDestinationIDs() {
-    return this.trips.map((trip) => trip.destinationID);
+  getDestinationIDs(data) {
+    return this[data].map((trip) => trip.destinationID);
   }
 
   getPastTrips(date) {

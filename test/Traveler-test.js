@@ -59,11 +59,11 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it.only('should be able to retrieve their destination Ids and approval status', () => {
+  it('should be able to retrieve their destination Ids for different data sets', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
 
     traveler.trips = agency.filterData('trips', 46);
-    expect(traveler.getDestinationIDs()).to.deep.equal([26, 14]);
+    expect(traveler.getDestinationIDs('trips')).to.deep.equal([26, 14]);
   });
 
   it('should be able to get pending trips', () => {
@@ -103,7 +103,7 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it.only('should be able to get trips after a specific date that are approved', () => {
+  it('should be able to get trips after a specific date that are approved', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
     traveler.trips = agency.filterData('trips', 22);
     const date = '2019/08/09';
@@ -122,11 +122,10 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it.only('should be able to get all trips before a specific date that are approved', () => {
+  it('should be able to get all trips before a specific date that are approved', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
     traveler.trips = agency.filterData('trips', 24);
     const date = '2020/08/09';
-    console.log(traveler.trips);
 
     expect(traveler.getPastTrips(date)).to.deep.equal([
       {
