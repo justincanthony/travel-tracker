@@ -59,11 +59,11 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it('should be able to retrieve their destination Ids for different data sets', () => {
+  it('should be able to retrieve their destination Ids', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
 
     traveler.trips = agency.filterData('trips', 46);
-    expect(traveler.getDestinationIDs('trips')).to.deep.equal([26, 14]);
+    expect(traveler.getDestinationIDs()).to.deep.equal([26, 14]);
   });
 
   it('should be able to get pending trips', () => {
