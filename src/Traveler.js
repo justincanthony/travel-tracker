@@ -17,15 +17,22 @@ class Traveler {
 
   getFutureTrips(date) {
     return this.trips.filter((trip) => {
-      if (dayjs(date).isBefore(dayjs(trip.date))) {
+      if (
+        dayjs(date).isBefore(dayjs(trip.date)) &&
+        trip.status === 'approved'
+      ) {
         return trip;
       }
     });
   }
 
+  getDestinationIDs(data) {
+    return this.trips.map((trip) => trip.destinationID);
+  }
+
   getPastTrips(date) {
     return this.trips.filter((trip) => {
-      if (dayjs(date).isAfter(dayjs(trip.date))) {
+      if (dayjs(date).isAfter(dayjs(trip.date)) && trip.status === 'approved') {
         return trip;
       }
     });

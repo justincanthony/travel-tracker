@@ -5,8 +5,6 @@ import './css/base.scss';
 
 // *****************************************************importing images here
 
-// import './images/turing-logo.png';
-
 // ****************************************************importing classes here
 
 import Traveler from './Traveler';
@@ -30,18 +28,18 @@ export { traveler, agency, trip, destinations };
 // ******************************************* declaration of global variables
 
 let traveler, agency, trip, destinations, id, password, trips;
-
+id = 44;
 // ****************************************************** event listeners here
 
 document.querySelector('.menu-bar').addEventListener('click', () => {
-  getAllData(5)
+  getAllData(id)
     .then((data) => {
       traveler = new Traveler(data[0]);
-      traveler.trips = data[1].trips.filter((trip) => trip.userID === 5);
+      traveler.trips = data[1].trips.filter((trip) => trip.userID === id);
       agency = new Agency(
+        data[3].travelers,
         data[1].trips,
-        data[2].destinations,
-        data[3].travelers
+        data[2].destinations
       );
     })
     .then(displayAllData);
