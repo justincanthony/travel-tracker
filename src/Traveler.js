@@ -15,12 +15,9 @@ class Traveler {
     return this.trips.filter((trip) => trip.status === 'approved');
   }
 
-  getFutureTrips(date) {
+  getFutureTrips(date, status) {
     return this.trips.filter((trip) => {
-      if (
-        dayjs(date).isBefore(dayjs(trip.date)) &&
-        trip.status === 'approved'
-      ) {
+      if (dayjs(date).isBefore(dayjs(trip.date)) && trip.status === status) {
         return trip;
       }
     });

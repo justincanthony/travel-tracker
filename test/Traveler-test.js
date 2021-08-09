@@ -103,12 +103,12 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it('should be able to get trips after a specific date that are approved', () => {
+  it.only('should be able to get trips after a specific date for any trip status', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
     traveler.trips = agency.filterData('trips', 22);
     const date = '2019/08/09';
 
-    expect(traveler.getFutureTrips(date)).to.deep.equal([
+    expect(traveler.getFutureTrips(date, 'approved')).to.deep.equal([
       {
         id: 22,
         userID: 22,
