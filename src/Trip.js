@@ -1,8 +1,13 @@
 class Trip {
-  constructor(trips, userID) {
-    this.trips = trips;
-    this.userID = userID || null;
-    this.travelerTrips = this.trips.filter((trip) => trip.userID === userID);
+  constructor(id, userID, destinationID, travelers, date, duration) {
+    this.id = id;
+    this.userID = userID;
+    this.destinationID = destinationID;
+    this.travelers = travelers;
+    this.date = date;
+    this.duration = duration;
+    this.status = 'pending';
+    this.suggestedActivities = [];
   }
 }
 
