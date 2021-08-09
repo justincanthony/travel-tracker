@@ -30,39 +30,6 @@ describe('Trip', () => {
   it('should be able to hold trip data', () => {
     expect(trip.trips).to.deep.equal(tripTestData);
   });
-
-  it("should be able to hold a single user's trip data", () => {
-    expect(trip.travelerTrips).to.deep.equal([
-      {
-        id: 45,
-        userID: 45,
-        destinationID: 5,
-        travelers: 6,
-        date: '2020/09/06',
-        duration: 9,
-        status: 'approved',
-        suggestedActivities: [],
-      },
-      {
-        id: 49,
-        userID: 45,
-        destinationID: 35,
-        travelers: 1,
-        date: '2020/05/14',
-        duration: 16,
-        status: 'approved',
-        suggestedActivities: [],
-      },
-      {
-        id: 64,
-        userID: 45,
-        destinationID: 25,
-        travelers: 3,
-        date: '2020/08/26',
-        duration: 7,
-        status: 'approved',
-        suggestedActivities: [],
-      },
-    ]);
-  });
 });
+
+//  need to finish testing new trip class
