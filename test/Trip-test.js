@@ -19,7 +19,7 @@ describe('Trip', () => {
     expect(trip).to.be.an.instanceOf(Trip);
   });
 
-  it('should be able to hold trip data', () => {
+  it('should be able to hold their trip data', () => {
     expect(trip.trips).to.deep.equal(tripTestData);
   });
 
