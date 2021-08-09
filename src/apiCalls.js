@@ -3,21 +3,23 @@ const getData = (suffix) => {
   return fetch(`${baseURL}${suffix}`).then((response) => response.json());
 };
 
-const getAllData = () => {
+const getTravelerData = (id) => {
+  id = `${id}`;
+  const baseURL = 'http://localhost:3001/api/v1/travelers/';
+  return fetch(`${baseURL}${id}`).then((response) => response.json());
+};
+
+// need to remove this hard coded data!!!
+const getAllData = (id) => {
   return Promise.all([
-    // getData('travelers'),
-    getData('travelers/1'),
+    getTravelerData(id),
     getData('trips'),
     getData('destinations'),
+    getData('travelers'),
   ]);
 };
 
 export default getAllData;
-
-// ****************************************Get User
-// Input for UsernameID
-// Input For password
-// if password === travel, then fire Get User Data
 
 // ****************************************Error Handling
 //
