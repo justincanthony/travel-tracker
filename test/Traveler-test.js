@@ -9,7 +9,7 @@ import travelersTestData from './travelers-test-data';
 
 let dayjs = require('dayjs');
 
-describe('Traveler', () => {
+describe.only('Traveler', () => {
   let traveler, agency;
 
   beforeEach(() => {
@@ -96,22 +96,12 @@ describe('Traveler', () => {
     ]);
   });
 
-  it('should be able to get trips after a specific date', () => {
+  it.only('should be able to get trips after a specific date that are approved', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
     traveler.trips = agency.filterData('trips', 22);
     const date = '2019/08/09';
 
     expect(traveler.getFutureTrips(date)).to.deep.equal([
-      {
-        id: 22,
-        userID: 22,
-        destinationID: 9,
-        travelers: 4,
-        date: '2020/05/01',
-        duration: 19,
-        status: 'pending',
-        suggestedActivities: [],
-      },
       {
         id: 22,
         userID: 22,
@@ -125,20 +115,21 @@ describe('Traveler', () => {
     ]);
   });
 
-  it('should be able to get all trips before a specific date', () => {
+  it.only('should be able to get all trips before a specific date that are approved', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
-    traveler.trips = agency.filterData('trips', 22);
-    const date = '2019/08/09';
+    traveler.trips = agency.filterData('trips', 24);
+    const date = '2020/08/09';
+    console.log(traveler.trips);
 
     expect(traveler.getPastTrips(date)).to.deep.equal([
       {
-        id: 22,
-        userID: 22,
-        destinationID: 9,
-        travelers: 4,
-        date: '2020/05/01',
+        id: 9,
+        userID: 24,
+        destinationID: 19,
+        travelers: 5,
+        date: '2019/12/19',
         duration: 19,
-        status: 'pending',
+        status: 'approved',
         suggestedActivities: [],
       },
     ]);
