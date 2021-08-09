@@ -59,7 +59,14 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it.only('should be able to get pending trips', () => {
+  it.only('should be able to retrieve their destination Ids and approval status', () => {
+    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
+
+    traveler.trips = agency.filterData('trips', 46);
+    expect(traveler.getDestinationIDs()).to.deep.equal([26, 14]);
+  });
+
+  it('should be able to get pending trips', () => {
     agency = new Agency(travelersTestData, tripTestData, destinationTestData);
 
     traveler.trips = agency.filterData('trips', 46);

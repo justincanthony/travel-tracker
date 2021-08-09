@@ -26,6 +26,10 @@ class Traveler {
     });
   }
 
+  getDestinationIDs() {
+    return this.trips.map((trip) => trip.destinationID);
+  }
+
   getPastTrips(date) {
     return this.trips.filter((trip) => {
       if (dayjs(date).isAfter(dayjs(trip.date)) && trip.status === 'approved') {
