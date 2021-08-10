@@ -25,13 +25,13 @@ class Traveler {
     });
   }
 
-  getDestinationIDs(data) {
+  getDestinationIDs() {
     return this.trips.map((trip) => trip.destinationID);
   }
 
-  getPastTrips(date) {
+  getPastTrips(date, status) {
     return this.trips.filter((trip) => {
-      if (dayjs(date).isAfter(dayjs(trip.date)) && trip.status === 'approved') {
+      if (dayjs(date).isAfter(dayjs(trip.date)) && trip.status === status) {
         return trip;
       }
     });
