@@ -1,14 +1,21 @@
 import chai from 'chai';
 const expect = chai.expect;
-import tripTestData from './trip-test-data';
 import Trip from '../src/Trip';
 
 describe('Trip', () => {
-  let trip, userID;
+  let trip;
 
   beforeEach(() => {
-    userID = 45;
-    trip = new Trip(tripTestData, userID);
+    trip = new Trip({
+      id: 18,
+      userID: 18,
+      destinationID: 2,
+      travelers: 2,
+      date: '2022/09/25',
+      duration: 17,
+      status: 'approved',
+      suggestedActivities: [],
+    });
   });
 
   it('should be a function', () => {
@@ -19,17 +26,39 @@ describe('Trip', () => {
     expect(trip).to.be.an.instanceOf(Trip);
   });
 
-  it('should be able to hold their trip data', () => {
-    expect(trip.trips).to.deep.equal(tripTestData);
+  it('should have an id', () => {
+    expect(trip.id).to.equal(18);
   });
 
-  it('should be able to take in a user id if provided', () => {
-    expect(trip.userID).to.equal(45);
+  it('should have a user id', () => {
+    expect(trip.userID).to.equal(18);
   });
 
-  it('should be able to hold trip data', () => {
-    expect(trip.trips).to.deep.equal(tripTestData);
+  it('should have a destination id', () => {
+    expect(trip.destinationID).to.equal(2);
+  });
+
+  it('should store the number of travelers', () => {
+    expect(trip.travelers).to.equal(2);
+  });
+
+  it('should have a date', () => {
+    expect(trip.date).to.equal('2022/09/25');
+  });
+
+  it('should have a duration', () => {
+    expect(trip.duration).to.equal(17);
+  });
+
+  it('should have a default status of "pending', () => {
+    expect(trip.status).to.equal('pending');
+  });
+
+  it('should have suggested activities', () => {
+    expect(trip.suggestedActivities).to.deep.equal([]);
+  });
+
+  it('should be able update status to approved', () => {
+    expect(trip.upDateStatus('approved')).to.equal('approved');
   });
 });
-
-//  need to finish testing new trip class
