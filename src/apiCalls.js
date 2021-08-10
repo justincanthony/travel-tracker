@@ -9,7 +9,6 @@ const getTravelerData = (id) => {
   return fetch(`${baseURL}${id}`).then((response) => response.json());
 };
 
-// need to remove this hard coded data!!!
 const getAllData = (id) => {
   return Promise.all([
     getTravelerData(id),
