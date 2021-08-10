@@ -23,29 +23,48 @@ export { traveler, agency, trip, destinations };
 
 // ******************************************* declaration of query selectors
 const submitTripRequest = document.getElementById('tripRequest');
-const formElem = document.getElementById('tripRequest');
 
+const pendingTrips = document.getElementById('pendingTrips');
+// const select = document.getElementById('destinationSelect');
+// let option = select.options[select.selectedIndex];
+// let value = select.options[select.selectedIndex].value;
 // ******************************************* declaration of global variables
 
 let traveler, agency, trip, destinations, id, password, trips;
 id = 44;
 // ****************************************************** event listeners here
 
-submitTripRequest.addEventListener('click', (event) => {
+const addTripToPage = (trip) => {
+  pendingTrips.innerHTML += `<p>${trip.name}</p>`;
+};
+
+submitTripRequest.addEventListener('submit', (event) => {
   event.preventDefault();
-  console.log(event);
+
+  console.log(value);
+
   const formData = new FormData(event.target);
   const tripRequest = {
-    id: 300,
-    userID: traveler.id,
-    destinationID: JSON.parse(formData.get('request-button')),
+    id: pendingTrips.childElementCount + 1,
+    userID: 44,
+    destinationID: document.getElementById('value').value,
+    travelers: formData.get4('trip'),
+    date: formData.get(),
+    duration: 4,
+    status: 'pending',
+    suggestedActivities: [],
   };
-  const trip = new Trip();
 });
 
-formElem.addEventListener('submit', (e) => {
-  e.preventDefault;
-});
+// formElem.addEventListener('submit', (e) => {
+//   e.preventDefault;
+
+//   fetch('http://localhost:3001/api/v1/trips', {
+//     method: 'POST',
+//     headers: { 'Content-Tyoe': 'application/json' },
+//     body: JSON.stringify(),
+//   });
+// });
 
 // var form = document.forms.namedItem("fileInfo");
 

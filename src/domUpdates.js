@@ -180,9 +180,7 @@ const displayCurrentTrips = () => {
   });
 
   currentDestinations.forEach((destination) => {
-    document.getElementById(
-      'pending-trips'
-    ).innerHTML += `<article class="card">
+    document.getElementById('pendingTrips').innerHTML += `<article class="card">
       <div class="card-header">
         <img src=${destination.image} alt=${
       destination.alt
