@@ -87,7 +87,7 @@ describe.only('Agency', () => {
     ]);
   });
 
-  it('should be able to calculate the cost of a trip for a user by id', () => {
-    expect(agency.calculateTotalTripsCostByID(45)).to.equal(10375);
+  it.only('should be able to calculate the cost of a trip for a user by id', () => {
+    expect(agency.calculateCurrentYearTripsCostByID(44)).to.equal(5540);
   });
 });
