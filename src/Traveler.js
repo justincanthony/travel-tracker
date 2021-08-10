@@ -3,7 +3,7 @@ var isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
 class Traveler {
   constructor(travelerData) {
-    this.UserID = travelerData.id;
+    this.userID = travelerData.id;
     this.name = travelerData.name;
     this.travelerType = travelerData.travelerType;
     this.trips = [];
