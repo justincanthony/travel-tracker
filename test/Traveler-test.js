@@ -130,7 +130,7 @@ describe.only('Traveler', () => {
     traveler.trips = agency.filterData('trips', 46);
     const date = '2020/08/09';
 
-    expect(traveler.getPastTrips(date)).to.deep.equal([
+    expect(traveler.getPastTrips(date, 'approved')).to.deep.equal([
       {
         id: 24,
         userID: 46,
@@ -154,9 +154,8 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it('should be able to return any trip that is currently in progress', () => {
+  it.only('should be able to return any trip that is currently in progress', () => {
     traveler.trips = agency.filterData('trips', 46);
-    console.log(traveler);
     expect(traveler.getCurrentTrips('2019/12/10')).to.deep.equal([]);
   });
 });
