@@ -9,10 +9,11 @@ import travelersTestData from './travelers-test-data';
 
 let dayjs = require('dayjs');
 
-describe.only('Traveler', () => {
+describe('Traveler', () => {
   let traveler, agency;
 
   beforeEach(() => {
+    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
     traveler = new Traveler({
       id: 46,
       name: 'Evanne Finnie',
@@ -33,7 +34,6 @@ describe.only('Traveler', () => {
   });
 
   it('should be able to store their trips', () => {
-    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
     traveler.trips = agency.filterData('trips', 46);
     expect(traveler.trips).to.deep.equal([
       {
@@ -60,23 +60,18 @@ describe.only('Traveler', () => {
   });
 
   it('should be able to retrieve their destination Ids', () => {
-    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
-
     traveler.trips = agency.filterData('trips', 46);
+
     expect(traveler.getDestinationIDs()).to.deep.equal([26, 14]);
   });
 
   it('should be able to get pending trips', () => {
-    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
-
     traveler.trips = agency.filterData('trips', 46);
 
     expect(traveler.getPendingTrips()).to.deep.equal([]);
   });
 
   it('should be able to get approved trips', () => {
-    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
-
     traveler.trips = agency.filterData('trips', 46);
 
     expect(traveler.getApprovedTrips()).to.deep.equal([
@@ -103,19 +98,28 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it('should be able to get trips after a specific date that are approved', () => {
-    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
-    traveler.trips = agency.filterData('trips', 22);
+  it('should be able to get trips after a specific date for any trip status', () => {
+    traveler.trips = agency.filterData('trips', 46);
     const date = '2019/08/09';
 
-    expect(traveler.getFutureTrips(date)).to.deep.equal([
+    expect(traveler.getFutureTrips(date, 'approved')).to.deep.equal([
       {
-        id: 22,
-        userID: 22,
-        destinationID: 9,
-        travelers: 4,
-        date: '2022/05/01',
-        duration: 19,
+        id: 24,
+        userID: 46,
+        destinationID: 26,
+        travelers: 5,
+        date: '2019/11/15',
+        duration: 7,
+        status: 'approved',
+        suggestedActivities: [],
+      },
+      {
+        id: 52,
+        userID: 46,
+        destinationID: 14,
+        travelers: 2,
+        date: '2020/01/24',
+        duration: 18,
         status: 'approved',
         suggestedActivities: [],
       },
@@ -123,21 +127,35 @@ describe.only('Traveler', () => {
   });
 
   it('should be able to get all trips before a specific date that are approved', () => {
-    agency = new Agency(travelersTestData, tripTestData, destinationTestData);
-    traveler.trips = agency.filterData('trips', 24);
+    traveler.trips = agency.filterData('trips', 46);
     const date = '2020/08/09';
 
-    expect(traveler.getPastTrips(date)).to.deep.equal([
+    expect(traveler.getPastTrips(date, 'approved')).to.deep.equal([
       {
-        id: 9,
-        userID: 24,
-        destinationID: 19,
+        id: 24,
+        userID: 46,
+        destinationID: 26,
         travelers: 5,
-        date: '2019/12/19',
-        duration: 19,
+        date: '2019/11/15',
+        duration: 7,
+        status: 'approved',
+        suggestedActivities: [],
+      },
+      {
+        id: 52,
+        userID: 46,
+        destinationID: 14,
+        travelers: 2,
+        date: '2020/01/24',
+        duration: 18,
         status: 'approved',
         suggestedActivities: [],
       },
     ]);
+  });
+
+  it('should be able to return any trip that is currently in progress', () => {
+    traveler.trips = agency.filterData('trips', 46);
+    expect(traveler.getCurrentTrips('2019/12/10')).to.deep.equal([]);
   });
 });

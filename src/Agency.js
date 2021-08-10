@@ -17,11 +17,15 @@ class Agency {
     });
   }
 
-  calculateTotalTripsCostByID(UserID) {
-    let userTrips = this.filterData('trips', UserID);
+  calculateCurrentYearTripsCostByID(userID) {
+    let currentYear = dayjs().format('YYYY');
+    let userTrips = this.filterData('trips', userID);
     let currentYearsTrips = userTrips.filter(
-      (trip) => trip.date === currentYear
+      (trip) =>
+        dayjs(trip.date).format('YYYY') === currentYear &&
+        trip.status === 'approved'
     );
+
     let userDestIDs = currentYearsTrips.map((trip) => {
       if (trip.status === 'approved') {
         return trip.destinationID;
@@ -38,12 +42,16 @@ class Agency {
       });
     });
 
-    return userDestinations.reduce((sum, destination, i) => {
-      sum +=
-        destination.estimatedLodgingCostPerDay * userTrips[i].duration +
-        destination.estimatedFlightCostPerPerson * userTrips[i].travelers;
-      return sum;
-    }, 0);
+    return (
+      userDestinations.reduce((sum, destination, i) => {
+        sum +=
+          destination.estimatedLodgingCostPerDay *
+            currentYearsTrips[i].duration +
+          destination.estimatedFlightCostPerPerson *
+            currentYearsTrips[i].travelers;
+        return sum;
+      }, 0) * 1.1
+    );
   }
 }
 export default Agency;

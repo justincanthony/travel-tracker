@@ -1,7 +1,9 @@
 let dayjs = require('dayjs');
+var isBetween = require('dayjs/plugin/isBetween');
+dayjs.extend(isBetween);
 class Traveler {
   constructor(travelerData) {
-    this.UserID = travelerData.id;
+    this.userID = travelerData.id;
     this.name = travelerData.name;
     this.travelerType = travelerData.travelerType;
     this.trips = [];
@@ -15,24 +17,33 @@ class Traveler {
     return this.trips.filter((trip) => trip.status === 'approved');
   }
 
-  getFutureTrips(date) {
+  getFutureTrips(date, status) {
     return this.trips.filter((trip) => {
-      if (
-        dayjs(date).isBefore(dayjs(trip.date)) &&
-        trip.status === 'approved'
-      ) {
+      if (dayjs(date).isBefore(dayjs(trip.date)) && trip.status === status) {
         return trip;
       }
     });
   }
 
-  getDestinationIDs(data) {
+  getDestinationIDs() {
     return this.trips.map((trip) => trip.destinationID);
   }
 
-  getPastTrips(date) {
+  getPastTrips(date, status) {
     return this.trips.filter((trip) => {
-      if (dayjs(date).isAfter(dayjs(trip.date)) && trip.status === 'approved') {
+      if (dayjs(date).isAfter(dayjs(trip.date)) && trip.status === status) {
+        return trip;
+      }
+    });
+  }
+
+  getCurrentTrips(date) {
+    return this.getApprovedTrips().filter((trip) => {
+      let endDate = dayjs(trip.date)
+        .add(trip.duration, 'day')
+        .format('YYYY/MM/DD');
+
+      if (dayjs(date).isBetween(dayjs(trip.date), dayjs(endDate), null, '[]')) {
         return trip;
       }
     });
