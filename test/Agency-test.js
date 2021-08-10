@@ -87,7 +87,7 @@ describe('Agency', () => {
     ]);
   });
 
-  it('should be able to calculate the cost of a trip for a user by id', () => {
+  it('should be able to calculate the cost of trips for the current year', () => {
     expect(agency.calculateCurrentYearTripsCostByID(44)).to.equal(
       6094.000000000001
     );

@@ -22,14 +22,53 @@ import getAllData from './apiCalls';
 export { traveler, agency, trip, destinations };
 
 // ******************************************* declaration of query selectors
-
-// let loginButton = document.querySelector('.menu-bar');
+const submitTripRequest = document.getElementById('tripRequest');
+const formElem = document.getElementById('tripRequest');
 
 // ******************************************* declaration of global variables
 
 let traveler, agency, trip, destinations, id, password, trips;
 id = 44;
 // ****************************************************** event listeners here
+
+submitTripRequest.addEventListener('click', (event) => {
+  event.preventDefault();
+  console.log(event);
+  const formData = new FormData(event.target);
+  const tripRequest = {
+    id: 300,
+    userID: traveler.id,
+    destinationID: JSON.parse(formData.get('request-button')),
+  };
+  const trip = new Trip();
+});
+
+formElem.addEventListener('submit', (e) => {
+  e.preventDefault;
+});
+
+// var form = document.forms.namedItem("fileInfo");
+
+// form.addEventListener('submit', function(ev) {
+
+//   var oOutput = document.querySelector("div"),
+//       oData = new FormData(form);
+
+//   oData.append("CustomField", "This is some extra data");
+
+//   var oReq = new XMLHttpRequest();
+//   oReq.open("POST", "stash.php", true);
+//   oReq.onload = function(oEvent) {
+//     if (oReq.status == 200) {
+//       oOutput.innerHTML = "Uploaded!";
+//     } else {
+//       oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+//     }
+//   };
+
+//   oReq.send(oData);
+//   ev.preventDefault();
+// }
 
 document.querySelector('.menu-bar').addEventListener('click', () => {
   getAllData(id)
@@ -75,4 +114,4 @@ document.querySelector('.menu-bar').addEventListener('click', () => {
 // All data will be returned to this function in an array
 // will need to access with bracket notation
 // possible to use iterator here to get the user form login maybe the
-// agency holds all data and new classes are instantiated from that as needed
+// agency holds all data and new classes are instantiated from that as n

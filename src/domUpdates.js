@@ -5,6 +5,9 @@ let dayjs = require('dayjs');
 
 let todaysDate = dayjs();
 
+const startDateInput = document.getElementById('start');
+const destinationDropDown = document.getElementById('optionSelect');
+
 const displayAllData = () => {
   displayTravelerData();
   displayDestinationData();
@@ -12,12 +15,13 @@ const displayAllData = () => {
   displayPendingTrips();
   displayPastTrips();
   displayCurrentTrips();
+  populateDropDownMenu();
 };
 
 const displayTravelerData = () => {
   document.getElementById('tripper-name').innerText = traveler.name;
   document.getElementById('tripCost').innerText =
-    agency.calculateCurrentYearTripsCostByID(traveler.id);
+    agency.calculateCurrentYearTripsCostByID(traveler.userID);
 };
 
 const displayDestinationData = () => {
@@ -41,7 +45,7 @@ const displayDestinationData = () => {
         <div class="card-div">
           <h5>Cost</h5>
           <h3 id="blue"></h3>
-        </div>  
+        </div> 
       </div>
     </article>`;
   });
@@ -199,4 +203,11 @@ const displayCurrentTrips = () => {
     </article>`;
   });
 };
+
+const populateDropDownMenu = () => {
+  agency.destinations.forEach((destination) => {
+    destinationDropDown.innerHTML += `<option value="${destination.id}">${destination.destination}</option>`;
+  });
+};
+
 export default displayAllData;
