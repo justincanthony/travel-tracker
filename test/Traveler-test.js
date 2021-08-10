@@ -9,7 +9,7 @@ import travelersTestData from './travelers-test-data';
 
 let dayjs = require('dayjs');
 
-describe.only('Traveler', () => {
+describe('Traveler', () => {
   let traveler, agency;
 
   beforeEach(() => {
@@ -154,7 +154,7 @@ describe.only('Traveler', () => {
     ]);
   });
 
-  it.only('should be able to return any trip that is currently in progress', () => {
+  it('should be able to return any trip that is currently in progress', () => {
     traveler.trips = agency.filterData('trips', 46);
     expect(traveler.getCurrentTrips('2019/12/10')).to.deep.equal([]);
   });

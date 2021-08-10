@@ -6,7 +6,7 @@ import tripTestData from './trip-test-data';
 import destinationTestData from './destination-test-data';
 import travelersTestData from './travelers-test-data';
 
-describe.only('Agency', () => {
+describe('Agency', () => {
   let agency, id;
 
   beforeEach(() => {
@@ -87,7 +87,9 @@ describe.only('Agency', () => {
     ]);
   });
 
-  it.only('should be able to calculate the cost of a trip for a user by id', () => {
-    expect(agency.calculateCurrentYearTripsCostByID(44)).to.equal(5540);
+  it('should be able to calculate the cost of a trip for a user by id', () => {
+    expect(agency.calculateCurrentYearTripsCostByID(44)).to.equal(
+      6094.000000000001
+    );
   });
 });
