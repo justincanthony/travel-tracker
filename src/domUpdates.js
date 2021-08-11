@@ -1,37 +1,38 @@
 // import /*Classes*/ from '/*filepath*/';
 import Destination from './Destination.js';
 import { traveler, agency } from './scripts.js';
-import requestTrip from './apiCalls.js';
-let dayjs = require('dayjs');
+import { requestTrip } from './apiCalls.js';
 
+let dayjs = require('dayjs');
 let todaysDate = dayjs();
+
+let tripObject;
+const select = document.getElementById('optionsSelect');
 const pendingTrips = document.getElementById('pendingTrips');
 const submit = document.getElementById('submitButton');
 const durationInput = document.getElementById('duration');
 const travelersInput = document.getElementById('travelers');
 const startDateInput = document.getElementById('start');
 const destinationDropDown = document.getElementById('optionSelect');
-let tripObject;
+const loginButton = document.getElementById('log');
+
 // const option = destinationDropDown.options[destinationDropDown.selectedIndex];
 // const value =
 //   destinationDropDown.options[destinationDropDown.selectedIndex].value;
-console.log(destinationDropDown.value)
 
 // event.preventDefault();
-  tripObject = {
-    id: 2361,
-    userID: 12,
-    destinationID: 10,
-    travelers: 1,
-    date: '2022/01/28',
-    duration: 18,
-    status: 'approved',
-    suggestedActivities: [],
-  };
-
+// tripObject = {
+//   id: 2361,
+//   userID: 12,
+//   destinationID: 10,
+//   travelers: 1,
+//   date: '2022/01/28',
+//   duration: 18,
+//   status: 'approved',
+//   suggestedActivities: [],
+// };
 
 submit.addEventListener('click', (event, tripObject) => {
-  // 
   requestTrip(event, tripObject);
 });
 
@@ -39,7 +40,7 @@ export const addTripToPage = (trip) => {
   pendingTrips.innerHTML += `<p>${trip.name}</p>`;
 };
 
-const displayAllData = () => {
+export const displayAllData = () => {
   displayTravelerData();
   displayDestinationData();
   displayFutureTripData();
@@ -50,7 +51,8 @@ const displayAllData = () => {
 };
 
 const displayTravelerData = () => {
-  document.getElementById('tripper-name').innerText = traveler.name;
+  console.log(traveler);
+  document.getElementById('tripperName').innerText = traveler.name;
   document.getElementById('tripCost').innerText =
     agency.calculateCurrentYearTripsCostByID(traveler.userID);
 };
@@ -236,12 +238,23 @@ const populateDropDownMenu = () => {
   });
 };
 
-const show = (element) => {
-  element.classList.remove('hidden');
-}
+export const displayLoginError = () => {
+  const errorMessage = document.querySelector('.error-message');
+  errorMessage.innerText =
+    'Oops! Your Username or Password is Incorrect, Please Try Again.';
+};
 
-const hide = (element) => {
+export const show = (element) => {
+  element.classList.remove('hidden');
+};
+
+export const hide = (element) => {
   element.classList.add('hidden');
-}
+};
 
 export default displayAllData;
+{
+  /* <p class="user-name-display" id="tripper-name"></p>
+        <p class="year-trip-cost" id="tripCost"></p> */
+}
+// <h3 class="error-message hidden"></h3>

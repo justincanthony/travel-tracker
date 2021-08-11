@@ -7,7 +7,6 @@ const getData = (suffix) => {
 
 const getTravelerData = (id) => {
   id = `${id}`;
-  console.log(id);
 
   const baseURL = 'http://localhost:3001/api/v1/travelers/';
 
@@ -16,21 +15,30 @@ const getTravelerData = (id) => {
 
 export const requestTrip = (newTrip) => {
   let body = {
-    "id": newTrip.id,
-    "userID": newTrip.userID,
-    "destinationID": newTrip.destinationID,
-    "travelers": newTrip.travelers,
-    "duration": newTrip.duration,
-    "status": newTrip.status,
-    "suggestedActivities": [],
+    id: newTrip.id,
+    userID: newTrip.userID,
+    destinationID: newTrip.destinationID,
+    travelers: newTrip.travelers,
+    duration: newTrip.duration,
+    status: newTrip.status,
+    suggestedActivities: [],
   };
   return fetch('http://localhost:3001/api/v1/trips', {
-    'method': "POST",
-    'headers': { 'Content-Type': 'application/json' },
-    'body': JSON.stringify(body),
-  })
-    // .then((response) => response.json())
-    // .then((data) => console.log(data));
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  // .then((response) => response.json())
+  // .then((data) => console.log(data));
+};
+
+export const getAllData = (id) => {
+  return Promise.all([
+    getTravelerData(id),
+    getData('trips'),
+    getData('destinations'),
+    getData('travelers'),
+  ]);
 };
 
 // const postTrip = (tripRequestObject) => {
@@ -44,17 +52,6 @@ export const requestTrip = (newTrip) => {
 //   .then(response => response.json())
 //   .then(data => console.log(data, 'DATA<><><>'))
 // }
-
-const getAllData = (id) => {
-  return Promise.all([
-    getTravelerData(id),
-    getData('trips'),
-    getData('destinations'),
-    getData('travelers'),
-  ]);
-};
-
-export default getAllData;
 
 // ****************************************Error Handling
 //
