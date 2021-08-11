@@ -124,7 +124,6 @@ To get a local copy up and running follow these simple steps.
 
 Original Spec              |  Recreation
 :----------------------------:|:-------------------------:
-![Original](https://user-images.githubusercontent.com/82064981/126916095-4d8e2061-cc58-4c3e-8e62-b3cd00caceb3.png)|![Screen Shot 2021-07-25 at 5 05 28 PM](https://user-images.githubusercontent.com/82064981/126916200-a6aaf012-4920-484d-811e-d0f856b077c9.png)
 
 
 
