@@ -6,7 +6,7 @@ const getData = (suffix) => {
 };
 
 const getTravelerData = (id) => {
-  id = `${id}`;
+  // id = `${id}`;
 
   const baseURL = 'http://localhost:3001/api/v1/travelers/';
 
