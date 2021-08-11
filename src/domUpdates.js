@@ -28,7 +28,7 @@ const displayDestinationData = () => {
   agency.destinations.forEach((destination) => {
     document.getElementById('destinations').innerHTML += `<article class="card">
       <div class="card-header">
-        <img src=${destination.image} class="destination-picture">
+        <img src=${destination.image} alt="${destination.image}" class="destination-picture">
       </div>
       <div class="card-main">
         <div class="card-div">
@@ -45,7 +45,7 @@ const displayDestinationData = () => {
         <div class="card-div">
           <h5>Cost</h5>
           <h3 id="blue"></h3>
-        </div> 
+        </div>
       </div>
     </article>`;
   });

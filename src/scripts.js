@@ -53,7 +53,7 @@ submitTripRequest.addEventListener('submit', (event) => {
   };
 });
 
-document.querySelector('.menu-bar').addEventListener('click', () => {
+// document.querySelector('.menu-bar').addEventListener('click', () => {
   getAllData(id)
     .then((data) => {
       traveler = new Traveler(data[0]);
@@ -65,4 +65,4 @@ document.querySelector('.menu-bar').addEventListener('click', () => {
       );
     })
     .then(displayAllData);
-});
+// });
