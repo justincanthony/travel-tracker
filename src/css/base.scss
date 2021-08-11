@@ -7,10 +7,87 @@
  }
 
 
- body {
-   background-color: rgb(133, 216, 223);
-   font-family: Arial;
- }
+
+ /*  Login */ 
+
+
+ .login {
+  width: 382px;
+  overflow: hidden;
+  margin: auto;
+  margin: 20 0 0 450px;
+  padding: 80px;
+  background: rgb(225, 125, 118);;
+  border-radius: 15px ;
+
+}
+
+h2  {
+  text-align: center;
+  color: #040b0c;
+  padding: 20px;
+}
+
+label {
+  color: #000000;
+  font-size: 17px;
+}
+
+#Uname  {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+}
+
+#Pass {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+}
+
+#log  {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 17px;
+  padding-left: 7px;
+  color: rgb(0, 0, 0);
+  transition: all 0.25s ease;
+}
+
+
+#log:hover {
+  height: 55px;
+  width: 55px;
+  /* padding-bottom: 15px;
+  border-bottom: solid 1px; */
+}
+
+span  {
+  color: white;
+  font-size: 17px;
+}
+
+  a  {
+float: right;
+background-color: grey;
+}
+
+
+
+
+
+/* body */
+
+
+  body {
+  background-color: rgb(133, 216, 223);
+  font-family: Arial;
+}
 
 
 h1 {
@@ -193,6 +270,11 @@ main {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+
+.hidden {
+  display: none;
 }
 
 @media screen and (max-width: 480px) {

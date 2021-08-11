@@ -15,28 +15,48 @@
   <body>
     <header>
       <div class="menu-bar">
-        <p class="logo" font-size="24pt">Time Trippers</p>
+        <h1 class="logo" font-size="24pt">Time Trippers</h1>
         <p class="user-name-display" id="tripper-name"></p>
         <p class="year-trip-cost" id="tripCost"></p>
       </div>
     </header>
-    <main>
+      <h2>Login Page</h2><br>
+      <div class="login" id="logIn">
+        <form id="login" method="get" action="login.php">
+          <label><b>username
+          </b>
+          </label>
+          <input type="text" name="Uname" id="Uname" placeholder="Username">
+          <br><br>
+          <label><b>password
+          </b>
+          </label>
+          <input type="Password" name="Pass" id="Pass" placeholder="Password">
+          <br><br>
+          <input type="button" name="log" id="log" value="Log In Here">
+          <br><br>
+          <input type="checkbox" id="check">
+          <span>Remember me</span>
+          <br><br>
+          Forgot <a href="#">Password</a>
+        </form>
+      </div>
+    <main class="hidden">
       <form enctype="multipart/form-data" method="post" name="fileInfo" class="trip-request" id="tripRequest">
         <label>Departure:
           <input type="date" id="start" name="trip"
           placeholder="${dayjs().format('YYYY-MM-DD')}"
           min="2021/08/09" max="2022/08/09" required>
         </label>
-        <label>Return:
-          <input type="number" id="duration" name="trip" placeholder="1" min="1" required>
+        <label>Duration:
+          <input type="number" id="duration" name="trip" placeholder="Days" min="1" required>
           </label>
           <select id="optionSelect">
-            <!-- <option value="free">Free</option> -->
+            <!-- <option value="free"></option> -->
           </select>
         <label>Number of travelers:
           <input type="number" id="travelers" name="trip" placeholder="1" min="1" required>
         </label>
-        <select id="destinationSelect"></select>
         <button class= "submit-button" id="submitButton">Get trip estimate</button>
       </form>
       <section class="card-container" id="destinations">

@@ -1,3 +1,5 @@
+import addTripToPage from './domUpdates';
+
 const getData = (suffix) => {
   const baseURL = 'http://localhost:3001/api/v1/';
   return fetch(`${baseURL}${suffix}`).then((response) => response.json());
@@ -5,9 +7,43 @@ const getData = (suffix) => {
 
 const getTravelerData = (id) => {
   id = `${id}`;
+  console.log(id);
+
   const baseURL = 'http://localhost:3001/api/v1/travelers/';
+
   return fetch(`${baseURL}${id}`).then((response) => response.json());
 };
+
+export const requestTrip = (newTrip) => {
+  let body = {
+    "id": newTrip.id,
+    "userID": newTrip.userID,
+    "destinationID": newTrip.destinationID,
+    "travelers": newTrip.travelers,
+    "duration": newTrip.duration,
+    "status": newTrip.status,
+    "suggestedActivities": [],
+  };
+  return fetch('http://localhost:3001/api/v1/trips', {
+    'method': "POST",
+    'headers': { 'Content-Type': 'application/json' },
+    'body': JSON.stringify(body),
+  })
+    // .then((response) => response.json())
+    // .then((data) => console.log(data));
+};
+
+// const postTrip = (tripRequestObject) => {
+//   fetch('http://localhost:3001/api/v1/trips', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(tripRequestObject),
+//   })
+//   .then(response => response.json())
+//   .then(data => console.log(data, 'DATA<><><>'))
+// }
 
 const getAllData = (id) => {
   return Promise.all([
@@ -23,12 +59,28 @@ export default getAllData;
 // ****************************************Error Handling
 //
 
+// const displayError = (error) => {
+//   if (error) {
+//     document.querySelector('.js-error').innerText =
+//       'You must fill out all fields!';
+//   }
+// };
+
+// const checkForError = (response) => {
+//   console.log(response);
+//   if (!response.ok) {
+//     throw new Error('Please make sure that all fields are filled out.');
+//   } else {
+//     return response.json();
+//   }
+// };
+
 // export const getTraveler = (path) => {
 //   return fetch(`${endPoint}${path}`)
 //     .then((response) => displayError(response))
 //     .then((data) => data)
 //     .catch((error) => console.error(error));
-// };
+// // };
 
 // displayError(response)
 // const displayError = (response) => {
@@ -40,4 +92,7 @@ export default getAllData;
 //   }
 // };
 
-// .catch((error) => console.error(error));
+// // .catch((error) => console.error(error));
+// .then((res) => checkForError(res))
+//     .then((trip) => addTripToPage(trip))
+//     .catch((err) => displayError(err));
