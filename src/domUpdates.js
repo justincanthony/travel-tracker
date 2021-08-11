@@ -39,20 +39,20 @@ const sendNewTrip = (event) => {
   };
   requestTrip(newTrip).then((data) => {
     console.log(data);
-    return getAllData(travelerId)
-      .then((data) => {
-        console.log(data);
-        let traveler = new Traveler(data[0]);
-        traveler.trips.push(
-          data[1].trips.filter((trip) => trip.travelerId === travelerId)
-        );
-        let agency = new Agency(
-          data[3].travelers,
-          data[1].trips,
-          data[2].destinations
-        );
-      })
-      .then(displayAllData);
+    return getAllData(travelerId).then((data) => {
+      console.log(data);
+      let traveler = new Traveler(data[0]);
+      traveler.trips = data[1].trips.filter(
+        (trip) => trip.userID === travelerId
+      );
+      console.log(traveler.trips);
+      let agency = new Agency(
+        data[3].travelers,
+        data[1].trips,
+        data[2].destinations
+      );
+      displayAllData();
+    });
   });
 };
 
@@ -62,7 +62,7 @@ export const addTripToPage = (trip) => {
 
 export const displayAllData = () => {
   displayTravelerData();
-  displayDestinationData();
+  // displayDestinationData();
   displayFutureTripData();
   displayPendingTrips();
   displayPastTrips();
@@ -71,37 +71,12 @@ export const displayAllData = () => {
 };
 
 const displayTravelerData = () => {
-  console.log(traveler);
   document.getElementById('loginTitle').innerText = traveler.name;
   document.getElementById(
     'tripCost'
   ).innerText = `Total Spent This Year ${agency.calculateCurrentYearTripsCostByID(
     traveler.userID
   )}`;
-};
-
-const displayDestinationData = () => {
-  agency.destinations.forEach((destination) => {
-    document.getElementById('destinations').innerHTML += `<article class="card">
-    <div class="card-header">
-      <img src=${destination.image} alt=${
-      destination.alt
-    } class="destination-picture">
-    </div>
-    <div class="card-main">
-      <div class="card-div">
-        <h3>${destination.destination}</h3>
-        <h5>${dayjs(destination.date).format('M/DD/YY')}</h5>
-      </div>
-      <div class="card-div-grey">
-      <h5>Lodging Cost Per Day $${destination.estimatedLodgingCostPerDay}</h5>
-        <h5>Flight Cost Per Person $${
-          destination.estimatedFlightCostPerPerson
-        }</h5>
-      </div>
-    </div>
-  </article>`;
-  });
 };
 
 const displayFutureTripData = () => {
@@ -118,8 +93,11 @@ const displayFutureTripData = () => {
     });
   });
 
+  let futureTripsArea = document.getElementById('futureTrips');
+  futureTripsArea.innerHTML = '';
+
   approvedDestinations.forEach((destination) => {
-    document.getElementById('future-trips').innerHTML += `<article class="card">
+    futureTripsArea.innerHTML += `<article class="card">
     <div class="card-header">
       <img src=${destination.image} alt=${
       destination.alt
@@ -143,6 +121,7 @@ const displayFutureTripData = () => {
 
 const displayPendingTrips = () => {
   const futurePendingTrips = traveler.getFutureTrips(todaysDate, 'pending');
+  console.log('post req - display-pending', traveler.trips);
   const pendingDestinations = [];
 
   agency.destinations.forEach((destination) => {
@@ -155,10 +134,11 @@ const displayPendingTrips = () => {
     });
   });
 
+  let displayPendingArea = document.getElementById('pendingTrips');
+  displayPendingArea.innerHTML = '';
+
   pendingDestinations.forEach((destination) => {
-    document.getElementById(
-      'pending-trips'
-    ).innerHTML += `<article class="card">
+    displayPendingArea.innerHTML += `<article class="card">
     <div class="card-header">
       <img src=${destination.image} alt=${
       destination.alt
@@ -181,7 +161,7 @@ const displayPendingTrips = () => {
 };
 
 const displayPastTrips = () => {
-  const pastTrips = traveler.getFutureTrips(todaysDate, 'pending');
+  const pastTrips = traveler.getPastTrips(todaysDate, 'approved');
   const pastDestinations = [];
 
   agency.destinations.forEach((destination) => {
@@ -194,10 +174,11 @@ const displayPastTrips = () => {
     });
   });
 
+  let displayPastArea = document.getElementById('pastTrips');
+  displayPastArea.innerHTML = '';
+
   pastDestinations.forEach((destination) => {
-    document.getElementById(
-      'pending-trips'
-    ).innerHTML += `<article class="card">
+    displayPastArea.innerHTML += `<article class="card">
     <div class="card-header">
       <img src=${destination.image} alt=${
       destination.alt
@@ -232,8 +213,11 @@ const displayCurrentTrips = () => {
     });
   });
 
+  let currentArea = document.getElementById('currentTrips');
+  currentArea.innerHTML = '';
+
   currentDestinations.forEach((destination) => {
-    document.getElementById('pendingTrips').innerHTML += `<article class="card">
+    currentArea.innerHTML += `<article class="card">
       <div class="card-header">
         <img src=${destination.image} alt=${
       destination.alt
