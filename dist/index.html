@@ -17,14 +17,14 @@
       <div class="menu-bar">
         <h1 class="logo" font-size="24pt">Time Trippers</h1>
         <p class="user-name-display" id="tripperName"></p>
-        <p class="year-trip-cost" id="tripCost"></p>
       </div>
     </header>
-      <h2>Login Page</h2><br>
+      <h2 class="login-title" id="loginTitle" >Login Page</h2>
+      <!-- <h2 class="traveler-title" id="travelerTitle" ></h2> -->
+      <h3 class="year-trip-cost" id="tripCost"></h3>
       <div class="login" id="logIn">
         <h3 class="error-message"></h3>
-        <form id="login" method="get" action="login.php">
-          <label><b>username
+        <form id="login" method="get" action="login.php">          <label><b>username
           </b>
           </label>
           <input type="text" name="userName" id="userName" placeholder="Username">
@@ -43,7 +43,7 @@
         </form>
       </div>
     <main class="main hidden">
-      <form enctype="multipart/form-data" method="post" name="fileInfo" class="trip-request" id="tripRequest">
+      <form name="fileInfo" class="trip-request" id="tripRequest">
         <label>Departure:
           <input type="date" id="start" name="trip"
           placeholder="${dayjs().format('YYYY-MM-DD')}"
@@ -52,13 +52,13 @@
         <label>Duration:
           <input type="number" id="duration" name="trip" placeholder="Days" min="1" required>
           </label>
-          <select id="optionSelect">
+          <select id="dropDown">
             <!-- <option value="free"></option> -->
           </select>
         <label>Number of travelers:
           <input type="number" id="travelers" name="trip" placeholder="1" min="1" required>
         </label>
-        <button class= "submit-button" id="submitButton">Get trip estimate</button>
+        <button class= "submit-button" id="submitButton" type="button">Get trip estimate</button>
       </form>
       <section class="card-container" id="destinations">
         <h2>Take A Little Trip</h2>

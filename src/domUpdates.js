@@ -1,40 +1,60 @@
-// import /*Classes*/ from '/*filepath*/';
+// imports
+import Traveler from './Traveler';
+import Agency from './Agency';
 import Destination from './Destination.js';
-import { traveler, agency } from './scripts.js';
-import { requestTrip } from './apiCalls.js';
+import { traveler, agency, travelerId } from './scripts.js';
+import { requestTrip, getAllData } from './apiCalls.js';
 
 let dayjs = require('dayjs');
 let todaysDate = dayjs();
 
-let tripObject;
-const select = document.getElementById('optionsSelect');
+// *******Query Slectors
 const pendingTrips = document.getElementById('pendingTrips');
 const submit = document.getElementById('submitButton');
 const durationInput = document.getElementById('duration');
 const travelersInput = document.getElementById('travelers');
 const startDateInput = document.getElementById('start');
-const destinationDropDown = document.getElementById('optionSelect');
-const loginButton = document.getElementById('log');
+const destinationDropDown = document.getElementById('dropDown');
 
-// const option = destinationDropDown.options[destinationDropDown.selectedIndex];
-// const value =
-//   destinationDropDown.options[destinationDropDown.selectedIndex].value;
+// *******Event Listener
 
-// event.preventDefault();
-// tripObject = {
-//   id: 2361,
-//   userID: 12,
-//   destinationID: 10,
-//   travelers: 1,
-//   date: '2022/01/28',
-//   duration: 18,
-//   status: 'approved',
-//   suggestedActivities: [],
-// };
-
-submit.addEventListener('click', (event, tripObject) => {
-  requestTrip(event, tripObject);
+submit.addEventListener('click', () => {
+  sendNewTrip(event);
 });
+
+const sendNewTrip = (event) => {
+  event.preventDefault();
+
+  let newTrip = {
+    id: Date.now(),
+    userID: travelerId,
+    destinationID: Number(
+      destinationDropDown.options[destinationDropDown.selectedIndex].value
+    ),
+    travelers: Number(travelersInput.value),
+    date: dayjs(startDateInput.value).format('YYYY/MM/DD'),
+    duration: Number(durationInput.value),
+    status: 'pending',
+    suggestedActivities: [],
+  };
+  requestTrip(newTrip).then((data) => {
+    console.log(data);
+    return getAllData(travelerId)
+      .then((data) => {
+        console.log(data);
+        let traveler = new Traveler(data[0]);
+        traveler.trips.push(
+          data[1].trips.filter((trip) => trip.travelerId === travelerId)
+        );
+        let agency = new Agency(
+          data[3].travelers,
+          data[1].trips,
+          data[2].destinations
+        );
+      })
+      .then(displayAllData);
+  });
+};
 
 export const addTripToPage = (trip) => {
   pendingTrips.innerHTML += `<p>${trip.name}</p>`;
@@ -52,9 +72,12 @@ export const displayAllData = () => {
 
 const displayTravelerData = () => {
   console.log(traveler);
-  document.getElementById('tripperName').innerText = traveler.name;
-  document.getElementById('tripCost').innerText =
-    agency.calculateCurrentYearTripsCostByID(traveler.userID);
+  document.getElementById('loginTitle').innerText = traveler.name;
+  document.getElementById(
+    'tripCost'
+  ).innerText = `Total Spent This Year ${agency.calculateCurrentYearTripsCostByID(
+    traveler.userID
+  )}`;
 };
 
 const displayDestinationData = () => {
@@ -253,8 +276,3 @@ export const hide = (element) => {
 };
 
 export default displayAllData;
-{
-  /* <p class="user-name-display" id="tripper-name"></p>
-        <p class="year-trip-cost" id="tripCost"></p> */
-}
-// <h3 class="error-message hidden"></h3>
