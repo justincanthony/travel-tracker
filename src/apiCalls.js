@@ -14,22 +14,11 @@ const getTravelerData = (id) => {
 };
 
 export const requestTrip = (newTrip) => {
-  let body = {
-    id: newTrip.id,
-    userID: newTrip.userID,
-    destinationID: newTrip.destinationID,
-    travelers: newTrip.travelers,
-    duration: newTrip.duration,
-    status: newTrip.status,
-    suggestedActivities: [],
-  };
   return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  // .then((response) => response.json())
-  // .then((data) => console.log(data));
+    body: JSON.stringify(newTrip),
+  }).then((response) => response.json());
 };
 
 export const getAllData = (id) => {
