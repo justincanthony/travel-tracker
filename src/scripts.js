@@ -47,9 +47,11 @@ const checkPassword = (event) => {
     show(mainPage);
     getAllData(travelerId)
       .then((data) => {
+        console.log('data', data);
         traveler = new Traveler(data[0]);
-        traveler.trips.push(
-          data[1].trips.filter((trip) => trip.travelerId === travelerId)
+        console.log('trips', data[1].trips);
+        traveler.trips = data[1].trips.filter(
+          (trip) => trip.userID === travelerId
         );
         agency = new Agency(
           data[3].travelers,
