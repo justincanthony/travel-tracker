@@ -16,32 +16,33 @@
     <header>
       <div class="menu-bar">
         <h1 class="logo" font-size="24pt">Time Trippers</h1>
-        <p class="user-name-display" id="tripper-name"></p>
+        <p class="user-name-display" id="tripperName"></p>
         <p class="year-trip-cost" id="tripCost"></p>
       </div>
     </header>
       <h2>Login Page</h2><br>
       <div class="login" id="logIn">
+        <h3 class="error-message"></h3>
         <form id="login" method="get" action="login.php">
           <label><b>username
           </b>
           </label>
-          <input type="text" name="Uname" id="Uname" placeholder="Username">
+          <input type="text" name="userName" id="userName" placeholder="Username">
           <br><br>
           <label><b>password
           </b>
           </label>
-          <input type="Password" name="Pass" id="Pass" placeholder="Password">
+          <input type="password" name="pass" id="pass" placeholder="Password">
           <br><br>
           <input type="button" name="log" id="log" value="Log In Here">
           <br><br>
           <input type="checkbox" id="check">
           <span>Remember me</span>
           <br><br>
-          Forgot <a href="#">Password</a>
+          Forgot<a href="#">Password</a>
         </form>
       </div>
-    <main class="hidden">
+    <main class="main hidden">
       <form enctype="multipart/form-data" method="post" name="fileInfo" class="trip-request" id="tripRequest">
         <label>Departure:
           <input type="date" id="start" name="trip"
