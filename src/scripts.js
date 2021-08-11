@@ -47,9 +47,9 @@ const checkPassword = (event) => {
     show(mainPage);
     getAllData(travelerId)
       .then((data) => {
-        console.log('data', data);
+        console.log('data at login', data);
         traveler = new Traveler(data[0]);
-        console.log('trips', data[1].trips);
+        console.log('all users trips at login ', data[1].trips);
         traveler.trips = data[1].trips.filter(
           (trip) => trip.userID === travelerId
         );
@@ -58,10 +58,9 @@ const checkPassword = (event) => {
           data[1].trips,
           data[2].destinations
         );
-        console.log(traveler);
+        console.log(' traveler at login', traveler);
       })
       .then(displayAllData);
   }
 };
-
 loginButton.addEventListener('click', checkPassword);

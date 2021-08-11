@@ -18,7 +18,7 @@ const destinationDropDown = document.getElementById('dropDown');
 
 // *******Event Listener
 
-submit.addEventListener('click', () => {
+submit.addEventListener('click', (event) => {
   sendNewTrip(event);
 });
 
@@ -39,20 +39,22 @@ const sendNewTrip = (event) => {
   };
   requestTrip(newTrip).then((data) => {
     console.log(data);
-    return getAllData(travelerId).then((data) => {
-      console.log(data);
+    getAllData(travelerId).then((data) => {
+      console.log('after post request', data);
       let traveler = new Traveler(data[0]);
       traveler.trips = data[1].trips.filter(
         (trip) => trip.userID === travelerId
       );
-      console.log(traveler.trips);
+      console.log('travelers trips after post', traveler.trips);
       let agency = new Agency(
         data[3].travelers,
         data[1].trips,
         data[2].destinations
       );
-      displayAllData();
     });
+    setTimeout(() => {
+      displayAllData();
+    }, 1000);
   });
 };
 
