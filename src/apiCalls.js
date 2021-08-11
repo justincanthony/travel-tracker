@@ -30,18 +30,6 @@ export const getAllData = (id) => {
   ]);
 };
 
-// const postTrip = (tripRequestObject) => {
-//   fetch('http://localhost:3001/api/v1/trips', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(tripRequestObject),
-//   })
-//   .then(response => response.json())
-//   .then(data => console.log(data, 'DATA<><><>'))
-// }
-
 // ****************************************Error Handling
 //
 
@@ -60,13 +48,6 @@ export const getAllData = (id) => {
 //     return response.json();
 //   }
 // };
-
-// export const getTraveler = (path) => {
-//   return fetch(`${endPoint}${path}`)
-//     .then((response) => displayError(response))
-//     .then((data) => data)
-//     .catch((error) => console.error(error));
-// // };
 
 // displayError(response)
 // const displayError = (response) => {
