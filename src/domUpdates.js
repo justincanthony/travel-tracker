@@ -2,61 +2,25 @@
 import Traveler from './Traveler';
 import Agency from './Agency';
 import Destination from './Destination.js';
-import { traveler, agency, travelerId } from './scripts.js';
-import { requestTrip, getAllData } from './apiCalls.js';
+import {
+  destinationDropDown,
+  traveler,
+  agency,
+  travelerId,
+} from './scripts.js';
+// import { requestTrip, getAllData } from './apiCalls.js';
 
 let dayjs = require('dayjs');
 let todaysDate = dayjs();
 
-// *******Query Slectors
+// *******Query Selectors
 const pendingTrips = document.getElementById('pendingTrips');
-const submit = document.getElementById('submitButton');
-const durationInput = document.getElementById('duration');
-const travelersInput = document.getElementById('travelers');
-const startDateInput = document.getElementById('start');
-const destinationDropDown = document.getElementById('dropDown');
 
-// *******Event Listener
-
-submit.addEventListener('click', (event) => {
-  sendNewTrip(event);
-});
-
-const sendNewTrip = (event) => {
-  event.preventDefault();
-
-  let newTrip = {
-    id: Date.now(),
-    userID: travelerId,
-    destinationID: Number(
-      destinationDropDown.options[destinationDropDown.selectedIndex].value
-    ),
-    travelers: Number(travelersInput.value),
-    date: dayjs(startDateInput.value).format('YYYY/MM/DD'),
-    duration: Number(durationInput.value),
-    status: 'pending',
-    suggestedActivities: [],
-  };
-  requestTrip(newTrip).then((data) => {
-    console.log(data);
-    getAllData(travelerId).then((data) => {
-      console.log('after post request', data);
-      let traveler = new Traveler(data[0]);
-      traveler.trips = data[1].trips.filter(
-        (trip) => trip.userID === travelerId
-      );
-      console.log('travelers trips after post', traveler.trips);
-      let agency = new Agency(
-        data[3].travelers,
-        data[1].trips,
-        data[2].destinations
-      );
-    });
-    setTimeout(() => {
-      displayAllData();
-    }, 1000);
-  });
-};
+// const submit = document.getElementById('submitButton');
+// const durationInput = document.getElementById('duration');
+// const travelersInput = document.getElementById('travelers');
+// const startDateInput = document.getElementById('start');
+// const destinationDropDown = document.getElementById('dropDown');
 
 export const addTripToPage = (trip) => {
   pendingTrips.innerHTML += `<p>${trip.name}</p>`;
@@ -64,7 +28,6 @@ export const addTripToPage = (trip) => {
 
 export const displayAllData = () => {
   displayTravelerData();
-  // displayDestinationData();
   displayFutureTripData();
   displayPendingTrips();
   displayPastTrips();
@@ -79,6 +42,20 @@ const displayTravelerData = () => {
   ).innerText = `Total Spent This Year ${agency.calculateCurrentYearTripsCostByID(
     traveler.userID
   )}`;
+};
+
+export const getTripEstimate = () => {
+  let tripEstimateDisplay = document.getElementById('tripEst');
+  let durationInput = Number(document.getElementById('duration').value);
+  let travelersInput = Number(document.getElementById('travelers').value);
+  let destinationID = Number(document.getElementById('dropDown').value);
+  let destination = agency.filterData('destinations', 1)[0];
+  console.log(destination);
+  let estimate = Math.round(
+    destination.estimatedLodgingCostPerDay * durationInput +
+      destination.estimatedFlightCostPerPerson * travelersInput * 1.1
+  );
+  tripEstimateDisplay.innerText = `Your estimated cost for this trip is: $${estimate}`;
 };
 
 const displayFutureTripData = () => {
