@@ -80,6 +80,8 @@ background-color: grey;
 }
 
 
+
+
 h1 {
   font-weight: 75;
   margin-top: 25px;
@@ -224,12 +226,8 @@ main {
 .card-container {
   height: 90%;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-content: center;
-  gap: 2em;
-  grid-auto-flow: row;
-  padding-top: 1.7%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .arrow-icon {
