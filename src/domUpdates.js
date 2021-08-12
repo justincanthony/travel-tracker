@@ -2,59 +2,25 @@
 import Traveler from './Traveler';
 import Agency from './Agency';
 import Destination from './Destination.js';
-import { traveler, agency, travelerId } from './scripts.js';
-import { requestTrip, getAllData } from './apiCalls.js';
+import {
+  destinationDropDown,
+  traveler,
+  agency,
+  travelerId,
+} from './scripts.js';
+// import { requestTrip, getAllData } from './apiCalls.js';
 
 let dayjs = require('dayjs');
 let todaysDate = dayjs();
 
-// *******Query Slectors
+// *******Query Selectors
 const pendingTrips = document.getElementById('pendingTrips');
-const submit = document.getElementById('submitButton');
-const durationInput = document.getElementById('duration');
-const travelersInput = document.getElementById('travelers');
-const startDateInput = document.getElementById('start');
-const destinationDropDown = document.getElementById('dropDown');
 
-// *******Event Listener
-
-submit.addEventListener('click', () => {
-  sendNewTrip(event);
-});
-
-const sendNewTrip = (event) => {
-  event.preventDefault();
-
-  let newTrip = {
-    id: Date.now(),
-    userID: travelerId,
-    destinationID: Number(
-      destinationDropDown.options[destinationDropDown.selectedIndex].value
-    ),
-    travelers: Number(travelersInput.value),
-    date: dayjs(startDateInput.value).format('YYYY/MM/DD'),
-    duration: Number(durationInput.value),
-    status: 'pending',
-    suggestedActivities: [],
-  };
-  requestTrip(newTrip).then((data) => {
-    console.log(data);
-    return getAllData(travelerId)
-      .then((data) => {
-        console.log(data);
-        let traveler = new Traveler(data[0]);
-        traveler.trips.push(
-          data[1].trips.filter((trip) => trip.travelerId === travelerId)
-        );
-        let agency = new Agency(
-          data[3].travelers,
-          data[1].trips,
-          data[2].destinations
-        );
-      })
-      .then(displayAllData);
-  });
-};
+// const submit = document.getElementById('submitButton');
+// const durationInput = document.getElementById('duration');
+// const travelersInput = document.getElementById('travelers');
+// const startDateInput = document.getElementById('start');
+// const destinationDropDown = document.getElementById('dropDown');
 
 export const addTripToPage = (trip) => {
   pendingTrips.innerHTML += `<p>${trip.name}</p>`;
@@ -62,7 +28,6 @@ export const addTripToPage = (trip) => {
 
 export const displayAllData = () => {
   displayTravelerData();
-  displayDestinationData();
   displayFutureTripData();
   displayPendingTrips();
   displayPastTrips();
@@ -71,7 +36,6 @@ export const displayAllData = () => {
 };
 
 const displayTravelerData = () => {
-  console.log(traveler);
   document.getElementById('loginTitle').innerText = traveler.name;
   document.getElementById(
     'tripCost'
@@ -80,28 +44,18 @@ const displayTravelerData = () => {
   )}`;
 };
 
-const displayDestinationData = () => {
-  agency.destinations.forEach((destination) => {
-    document.getElementById('destinations').innerHTML += `<article class="card">
-    <div class="card-header">
-      <img src=${destination.image} alt=${
-      destination.alt
-    } class="destination-picture">
-    </div>
-    <div class="card-main">
-      <div class="card-div">
-        <h3>${destination.destination}</h3>
-        <h5>${dayjs(destination.date).format('M/DD/YY')}</h5>
-      </div>
-      <div class="card-div-grey">
-      <h5>Lodging Cost Per Day $${destination.estimatedLodgingCostPerDay}</h5>
-        <h5>Flight Cost Per Person $${
-          destination.estimatedFlightCostPerPerson
-        }</h5>
-      </div>
-    </div>
-  </article>`;
-  });
+export const getTripEstimate = () => {
+  let tripEstimateDisplay = document.getElementById('tripEst');
+  let durationInput = Number(document.getElementById('duration').value);
+  let travelersInput = Number(document.getElementById('travelers').value);
+  let destinationID = Number(document.getElementById('dropDown').value);
+  let destination = agency.filterData('destinations', 1)[0];
+  console.log(destination);
+  let estimate = Math.round(
+    destination.estimatedLodgingCostPerDay * durationInput +
+      destination.estimatedFlightCostPerPerson * travelersInput * 1.1
+  );
+  tripEstimateDisplay.innerText = `Your estimated cost for this trip is: $${estimate}`;
 };
 
 const displayFutureTripData = () => {
@@ -118,8 +72,11 @@ const displayFutureTripData = () => {
     });
   });
 
+  let futureTripsArea = document.getElementById('futureTrips');
+  futureTripsArea.innerHTML = '';
+
   approvedDestinations.forEach((destination) => {
-    document.getElementById('future-trips').innerHTML += `<article class="card">
+    futureTripsArea.innerHTML += `<article class="card">
     <div class="card-header">
       <img src=${destination.image} alt=${
       destination.alt
@@ -143,6 +100,7 @@ const displayFutureTripData = () => {
 
 const displayPendingTrips = () => {
   const futurePendingTrips = traveler.getFutureTrips(todaysDate, 'pending');
+  console.log('post req - display-pending', traveler.trips);
   const pendingDestinations = [];
 
   agency.destinations.forEach((destination) => {
@@ -155,10 +113,11 @@ const displayPendingTrips = () => {
     });
   });
 
+  let displayPendingArea = document.getElementById('pendingTrips');
+  displayPendingArea.innerHTML = '';
+
   pendingDestinations.forEach((destination) => {
-    document.getElementById(
-      'pending-trips'
-    ).innerHTML += `<article class="card">
+    displayPendingArea.innerHTML += `<article class="card">
     <div class="card-header">
       <img src=${destination.image} alt=${
       destination.alt
@@ -181,7 +140,7 @@ const displayPendingTrips = () => {
 };
 
 const displayPastTrips = () => {
-  const pastTrips = traveler.getFutureTrips(todaysDate, 'pending');
+  const pastTrips = traveler.getPastTrips(todaysDate, 'approved');
   const pastDestinations = [];
 
   agency.destinations.forEach((destination) => {
@@ -194,10 +153,11 @@ const displayPastTrips = () => {
     });
   });
 
+  let displayPastArea = document.getElementById('pastTrips');
+  displayPastArea.innerHTML = '';
+
   pastDestinations.forEach((destination) => {
-    document.getElementById(
-      'pending-trips'
-    ).innerHTML += `<article class="card">
+    displayPastArea.innerHTML += `<article class="card">
     <div class="card-header">
       <img src=${destination.image} alt=${
       destination.alt
@@ -232,8 +192,11 @@ const displayCurrentTrips = () => {
     });
   });
 
+  let currentArea = document.getElementById('currentTrips');
+  currentArea.innerHTML = '';
+
   currentDestinations.forEach((destination) => {
-    document.getElementById('pendingTrips').innerHTML += `<article class="card">
+    currentArea.innerHTML += `<article class="card">
       <div class="card-header">
         <img src=${destination.image} alt=${
       destination.alt

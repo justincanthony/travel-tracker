@@ -24,7 +24,8 @@
       <h3 class="year-trip-cost" id="tripCost"></h3>
       <div class="login" id="logIn">
         <h3 class="error-message"></h3>
-        <form id="login" method="get" action="login.php">          <label><b>username
+        <form id="login">
+          <label><b>username
           </b>
           </label>
           <input type="text" name="userName" id="userName" placeholder="Username">
@@ -60,20 +61,19 @@
         </label>
         <button class= "submit-button" id="submitButton" type="button">Get trip estimate</button>
       </form>
-      <section class="card-container" id="destinations">
-        <h2>Take A Little Trip</h2>
+      <h2 class="trip-est" id="tripEst"></h2>
+      <br>
+      <h2>Future Trips</h2>
+      <section class="card-container" id="futureTrips">
       </section>
-      <section class="card-container" id="future-trips">
-        <h2>Future Trippin</h2>
+      <h2>Current Trip</h2>
+      <section class="card-container" id="currentTrips">
       </section>
-      <section class="card-container" id="current-trips">
-        <h2>You're Tripping</h2>
-      </section>
+      <h2>Pending Trips</h2>
       <section class="card-container" id="pendingTrips">
-        <h2>Trips in Limbo</h2>
       </section>
-      <section class="card-container" id="past-trips">
-        <h2>Flashbacks</h2>
+      <h2>Past Trips</h2>
+      <section class="card-container" id="pastTrips">
       </section>
     </main>
     <script src="bundle.js"></script>
