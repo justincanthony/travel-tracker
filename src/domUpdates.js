@@ -49,7 +49,7 @@ export const getTripEstimate = () => {
   let durationInput = Number(document.getElementById('duration').value);
   let travelersInput = Number(document.getElementById('travelers').value);
   let destinationID = Number(document.getElementById('dropDown').value);
-  let destination = agency.filterData('destinations', 1)[0];
+  let destination = agency.filterData('destinations', destinationID)[0];
   console.log(destination);
   let estimate = Math.round(
     destination.estimatedLodgingCostPerDay * durationInput +
