@@ -1,26 +1,11 @@
-// imports
-import Traveler from './Traveler';
-import Agency from './Agency';
 import Destination from './Destination.js';
-import {
-  destinationDropDown,
-  traveler,
-  agency,
-  travelerId,
-} from './scripts.js';
-// import { requestTrip, getAllData } from './apiCalls.js';
+import { destinationDropDown, traveler, agency } from './scripts.js';
 
 let dayjs = require('dayjs');
 let todaysDate = dayjs();
 
 // *******Query Selectors
 const pendingTrips = document.getElementById('pendingTrips');
-
-// const submit = document.getElementById('submitButton');
-// const durationInput = document.getElementById('duration');
-// const travelersInput = document.getElementById('travelers');
-// const startDateInput = document.getElementById('start');
-// const destinationDropDown = document.getElementById('dropDown');
 
 export const addTripToPage = (trip) => {
   pendingTrips.innerHTML += `<p>${trip.name}</p>`;
@@ -49,8 +34,7 @@ export const getTripEstimate = () => {
   let durationInput = Number(document.getElementById('duration').value);
   let travelersInput = Number(document.getElementById('travelers').value);
   let destinationID = Number(document.getElementById('dropDown').value);
-  let destination = agency.filterData('destinations', 1)[0];
-  console.log(destination);
+  let destination = agency.filterData('destinations', destinationID)[0];
   let estimate = Math.round(
     destination.estimatedLodgingCostPerDay * durationInput +
       destination.estimatedFlightCostPerPerson * travelersInput * 1.1
@@ -100,7 +84,6 @@ const displayFutureTripData = () => {
 
 const displayPendingTrips = () => {
   const futurePendingTrips = traveler.getFutureTrips(todaysDate, 'pending');
-  console.log('post req - display-pending', traveler.trips);
   const pendingDestinations = [];
 
   agency.destinations.forEach((destination) => {
