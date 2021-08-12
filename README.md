@@ -75,9 +75,9 @@ https://github.com/justincanthony -->
 ### About the Project
 <!-- Describe what the over all scope and learninging goal of the project is, and what set-up the challenge was framed in-->
 
-This project was intended to introduce students to the concept of making Get and Post requests from a locally hosted API.There was an emphasis on use of OOP to drive the design of the application and the code, Solidify the code review process
-Create a robust test suite that thoroughly tests all functionality of a client-side application
+This project was intended to introduce students to the concept of making Get and Post requests from a locally hosted API. There was an emphasis on use of OOP to drive the design of the application.
 
+The application allows for users to login to the site and view trips of thiers, past, present, pending and future. Users can select from a drop down menu thier destination, input their number of days, and number of travelers. When their request has been submitted, the file is sent to the agnency, and appears as pending in on their screen.
 
 ### Built With
 * [Javascript](https://www.javascript.com/)
@@ -106,16 +106,6 @@ To get a local copy up and running follow these simple steps.
    ```sh
    npm install normailze.css
    ```
-
-
-## USAGE                       
-<!--DESCRIBE WHAT THE USAGE EXPERIENCE IS LIKE/BUILT ON -->
-
-                          
-<!-- Screen Size EXAMPLES -->
-
-Original Spec              |  Recreation
-:----------------------------:|:-------------------------:
 
 
 
