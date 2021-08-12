@@ -1,1 +1,10 @@
-$body-bg-color: rgb(133, 216, 223);
+@mixin center-items() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin login-inputs() {
+  width: 300px;
+  height: 30px;
+  border: none;
+}
