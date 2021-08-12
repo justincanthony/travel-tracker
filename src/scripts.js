@@ -25,7 +25,7 @@ export {
   destinations,
   travelerId,
 };
-// ******************************************* declaration of query selectors
+// ************************************* declaration of query selectors
 
 const userNameInput = document.getElementById('userName');
 const password = document.getElementById('pass');
@@ -37,43 +37,54 @@ const durationInput = document.getElementById('duration');
 const travelersInput = document.getElementById('travelers');
 const startDateInput = document.getElementById('start');
 const destinationDropDown = document.getElementById('dropDown');
-// ******************************************* declaration of global variables
+// ************************************ declaration of global variables
 
 let traveler, agency, trip, destinations, travelerId;
 
-// ****************************************************** event listeners here
+// ******************************************************Login Function
 
-const checkPassword = (event) => {
-  event.preventDefault();
+// const checkPassword = (event) => {
+//   event.preventDefault();
 
-  travelerId = parseInt(userNameInput.value.split('traveler')[1]);
+//   travelerId = parseInt(userNameInput.value.split('traveler')[1]);
 
-  if (
-    !travelerId ||
-    travelerId < 1 ||
-    travelerId > 50 ||
-    password.value !== 'travel'
-  ) {
-    displayLoginError();
-  } else {
-    hide(loginPage);
-    show(mainPage);
-    getAllData(travelerId)
-      .then((data) => {
-        traveler = new Traveler(data[0]);
-        traveler.trips = data[1].trips.filter(
-          (trip) => trip.userID === travelerId
-        );
-        agency = new Agency(
-          data[3].travelers,
-          data[1].trips,
-          data[2].destinations
-        );
-      })
-      .then(displayAllData);
-  }
-};
+//   if (
 
+//     travelerId < 1 ||
+//     travelerId > 50 ||
+//     password.value !== 'travel'
+//   ) {
+//     displayLoginError();
+//   } else {
+//     hide(loginPage);
+//     show(mainPage);
+//     getAllData(travelerId)
+//       .then((data) => {
+//         traveler = new Traveler(data[0]);
+//         traveler.trips = data[1].trips.filter(
+//           (trip) => trip.userID === travelerId
+//         );
+//         agency = new Agency(
+//           data[3].travelers,
+//           data[1].trips,
+//           data[2].destinations
+//         );
+//       })
+//       .then(displayAllData);
+//   }
+// };
+
+window.addEventListener('load', getAllData(44));
+
+getAllData(44)
+  .then((data) => {
+    traveler = new Traveler(data[0]);
+    traveler.trips = data[1].trips.filter((trip) => trip.userID === 44);
+    agency = new Agency(data[3].travelers, data[1].trips, data[2].destinations);
+  })
+  .then(displayAllData);
+
+// ********************************** Login Event Listener
 loginButton.addEventListener('click', checkPassword);
 
 submit.addEventListener('click', (event) => {
@@ -81,6 +92,7 @@ submit.addEventListener('click', (event) => {
   sendNewTrip(event);
 });
 
+// ********************************** Post Request
 const sendNewTrip = (event) => {
   event.preventDefault();
 

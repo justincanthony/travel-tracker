@@ -16,9 +16,9 @@ export const requestTrip = (newTrip) => {
   }).then((response) => response.json());
 };
 
-export const getAllData = (id) => {
+export const getAllData = () => {
   return Promise.all([
-    getTravelerData(id),
+    getTravelerData(44),
     getData('trips'),
     getData('destinations'),
     getData('travelers'),
